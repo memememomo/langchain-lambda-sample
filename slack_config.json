@@ -1,0 +1,35 @@
+{
+    "display_information": {
+        "name": "assistant_bot",
+        "description": "assistant_bot",
+        "background_color": "#3b9c3b"
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "assistant_bot",
+            "always_online": true
+        }
+    },
+    "oauth_config": {
+        "scopes": {
+            "user": [
+                "chat:write"
+            ],
+            "bot": [
+                "chat:write",
+                "app_mentions:read"
+            ]
+        }
+    },
+    "settings": {
+        "event_subscriptions": {
+            "request_url": "https://xxxxxxxxx.lambda-url.ap-northeast-1.on.aws/",
+            "bot_events": [
+                "app_mention"
+            ]
+        },
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": false
+    }
+}

@@ -1,0 +1,62 @@
+service: ChatGPTSlackFunctionSample
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  stage: dev
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - lambda:InvokeFunction
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:Query
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - bedrock:*
+          Resource: "*"
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    slim: true
+    zip: true
+
+package:
+  patterns:
+    - '!.venv/**'
+    - '!.env'
+    - '!.gitignore'
+    - '!.python-version'
+    - '!.git/**'
+
+functions:
+  app:
+    name: ChatGPTSlackFunctionSample-${sls:stage}-app
+    handler: app.handler
+    runtime: python3.10
+    memorySize: 512
+    timeout: 900
+    url: true
+    
+resources:
+  Resources:
+    ChatHistory:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ChatHistory2
+        AttributeDefinitions:
+          - AttributeName: SessionId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: SessionId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST 
+
+
+plugins:
+  - serverless-python-requirements
+  - serverless-dotenv-plugin

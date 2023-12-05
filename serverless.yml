@@ -41,7 +41,7 @@ resources:
     ChatHistory:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ChatHistory2
+        TableName: ChatHistory
         AttributeDefinitions:
           - AttributeName: SessionId
             AttributeType: S

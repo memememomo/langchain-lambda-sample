@@ -19,12 +19,6 @@ provider:
             - bedrock:*
           Resource: "*"
 
-custom:
-  pythonRequirements:
-    dockerizePip: non-linux
-    slim: true
-    zip: true
-
 package:
   patterns:
     - '!.venv/**'

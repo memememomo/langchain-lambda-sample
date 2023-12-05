@@ -12,7 +12,6 @@ from slack_bolt.adapter.aws_lambda import SlackRequestHandler
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.schema import LLMResult, HumanMessage, SystemMessage
 
-
 region="us-east-1"
 
 # ログ
@@ -71,7 +70,7 @@ class SlackStreamingCallbackHandler(BaseCallbackHandler):
             {"type": "divider"},
             {
                 "type": "context",
-                "elements": [{"type": "mrkdown", "text": message_context}],
+                "elements": [{"type": "mrkdwn", "text": message_context}],
             },
         ]
 
